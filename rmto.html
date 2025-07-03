@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DAR App Tutorial</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #e6ecf0);
+      padding: 20px;
+      margin: 0;
+     box-sizing: border-box;
+    }
+
+    .tutorial-card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      max-width: 750px;
+      margin: 0 auto;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { text-align: center; font-size: 28px; color: #333; margin-bottom: 15px; }
+    h2 { font-size: 22px; margin-top: 20px; margin-bottom: 12px; color: #333; }
+    ul { padding-left: 20px; margin-bottom: 25px; }
+    ul li { margin-bottom: 10px; color: #444; line-height: 1.6; }
+
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 25px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .icon-img {
+      width: 80px;
+      height: auto;
+      margin-right: 15px;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .icon-img:hover { transform: scale(1.1); }
+
+    .description { flex-grow: 1; }
+    .description h3 {
+      margin: 0 0 6px 0;
+      font-size: 18px;
+      color: #222;
+    }
+    .description p {
+      margin: 0;
+      color: #555;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .center-button, .responsive-button-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .next-button, .next1-button {
+      color: white;
+      padding: 12px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .next-button { background-color: #649ce6; }
+    .next-button:hover {
+      background-color: #649ce6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .next1-button { background-color: #438359; }
+    .next1-button:hover {
+      background-color: #3a754f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .page { display: none; opacity: 0; transition: opacity 0.4s ease; }
+    .active { display: block; opacity: 1; }
+
+    .page-indicator {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+    }
+
+ .video-container {
+  width: 100%;
+  max-width: 360px; /* Adjust this for desired portrait width */
+  margin: auto;
+  padding: 0;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+    @media (max-width: 600px) {
+      .tutorial-card { padding: 15px; }
+      h1 { font-size: 24px; }
+      h2 { font-size: 18px; }
+
+      .feature {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .icon-img {
+        margin: 0 0 10px 0;
+        width: 50px;
+      }
+
+      .description h3 { font-size: 16px; }
+      .description p { font-size: 14px; }
+
+      .next-button, .next1-button {
+        width: 100%;
+        font-size: 15px;
+      }
+
+      .responsive-button-container { text-align: center; }
+    }
+    @media (min-width: 768px) {
+  .video-container {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .video-container {
+    width: 40%;
+  }
+}
+
+  </style>   
+</head>
+<body>
+
+  <div class="tutorial-card">
+    <h1>RM-INVENTORY APP TUTORIAL🙌</h1>
+
+    <!-- Page 1 -->
+    <div id="page1" class="page active">
+      <div class="center-button">
+        <button class="next-button" id="langToggle" onclick="toggleLanguage()">தமிழ்</button>
+      </div>
+
+     <div class="video-container">
+  <h2>TUTORIAL VIDEO</h2>
+  <video controls>
+    <source src="dar-tutorial.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
+
+      <!-- English Notes -->
+      <div id="darEnglish">
+<h2>LOGIN PAGE:</h2>
+        <ul> 
+          <li>First, log in using your username and password by clicking the "ENTER" button and turn on your location before login a app</li>
+        </ul>
+
+        <h2>GALLERY PAGE:</h2>
+        <ul>
+          <li>On the gallery screen, tap the top <strong>"Take Photo"</strong> button to open the camera page and capture a photo.</li>
+          <li>After capturing a photo, it will appear as a pending entry on the gallery page. Tap the <strong>">"</strong> (arrow) to fill in the required details.</li>
+          <li>At the bottom of the gallery screen, there are three buttons:</li>
+          <li>Click the <strong>"Copy Link"</strong> button to copy the RM Camera link.</li>
+          <li>Click the <strong>"Link Photos"</strong> button to navigate to the <strong>"Sample Pics"</strong> page showing RM photos.</li>
+          <li>Click the <strong>"RM-History"</strong> button to navigate to the <strong>"History Page"</strong>, which shows your submitted details.</li>
+          <li>Submitted entries appear in <strong>green</strong>, while pending entries appear in <strong>light red</strong>.</li>
+        </ul>
+
+
+      <h2>CAMERA PAGE:</h2>
+<ul>
+  <li>On the camera page, there is a button to open the camera, with options for both front and back cameras.</li>
+  <li>Tap the camera button to take photos.</li>
+  <li>You can only submit your photos after taking at least one; the submit button will be disabled otherwise.</li>
+  <li>Once you submit your photos, you will be redirected to the gallery page to edit your form.</li>
+</ul>
+
+<h2>EDIT FORM PAGE:</h2>
+<ul>
+  <li>On the edit form page, update your information along with the attached photos.</li>
+  <li>The submit button will not be visible until the first six data value cards are filled out.</li>
+  <li>After filling in all the fields, click the submit button to complete the process.</li>
+</ul>
+
+<h2>RM IMAGES PAGE:</h2>
+<ul>
+  <li>On the RM History page, you will see all images taken through the provided link.</li>
+  <li>Select one or multiple photos, then press the "ADD" button to add them to the edit form.</li>
+</ul>
+
+<h2>RM HISTORY PAGE:</h2>
+<ul>
+  <li>On the RM History page, you will see all the details you have submitted.</li>
+</ul>
+
+
+<h2>CHANGE PASSWORD PAGE:</h2>
+<ul>
+  <li>On the Change Password page, enter your registered Name, current password, and new password. Confirm the new password, then click the "Update Password" button.</li>
+  <li>Your password will be successfully updated.</li>
+</ul>
+
+  </div>
+
+      <!-- Tamil Notes -->
+      <div id="darTamil" style="display: none;">
+        <div id="darTamil">
+
+ <h2>Login பக்கம்:</h2>
+<ul>
+  <li>முதலில், உங்கள் பயனர்பெயர் மற்றும் கடவுச்சொல்லைப் பயன்படுத்தி "ENTER" பொத்தானை கிளிக் செய்து உள்நுழைக.
+     உள்நுழைவதற்கு முன் உங்கள் இடத்தை (location) இயக்கவும்.</li>
+</ul>
+
+<h2>Gallery பக்கம்:</h2>
+<ul>
+  <li>கேலரி திரையில், மேல் பகுதியில் உள்ள <strong>"Take Photo"</strong> பொத்தானைத் தட்டினால்,
+     கேமரா பக்கம் திறக்கப்படும் மற்றும் புகைப்படம் எடுக்கலாம்.</li>
+  <li>புகைப்படம் எடுத்த பின்பு, அது ஒரு நிலுவையிலான பதிவாக கேலரி பக்கத்தில் தோன்றும். தேவையான விவரங்களை 
+    உள்ளிட <strong>">"</strong> (அம்பு) பொத்தானைத் தட்டவும்.</li>
+  <li>கேலரி திரையின் கீழ் மூன்று பொத்தான்கள் உள்ளன:</li>
+  <li><strong>"Copy Link"</strong> பொத்தானை அழுத்தி RM கேமரா இணைப்பை நகலெடுக்கலாம்.</li>
+  <li><strong>"Link Photos"</strong> பொத்தானை அழுத்தி <strong>"Sample Pics"</strong> பக்கத்துக்குச் செல்லலாம், அங்கு RM புகைப்படங்கள் காட்டப்படும்.</li>
+  <li><strong>"RM-History"</strong> பொத்தானை அழுத்தி <strong>"History Page"</strong> பக்கத்துக்குச் செல்லலாம், அங்கு நீங்கள் சமர்ப்பித்த அனைத்து விவரங்களும் காணப்படும்.</li>
+  <li>சமர்ப்பித்த பதிவுகள் <strong>பச்சை</strong> நிறத்தில் காணப்படும், நிலுவையிலுள்ளவை <strong>இளஞ்சிவப்பு</strong> நிறத்தில் காணப்படும்.</li>
+</ul>
+
+<h2>Camera பக்கம்:</h2>
+<ul>
+  <li>கேமரா பக்கத்தில், கேமராவை திறக்கும் ஒரு பொத்தான் இருக்கும், இதில் முன்னணி மற்றும் பின்னணி கேமரா ஆகிய இரண்டும் தேர்வு செய்யலாம்.</li>
+  <li>புகைப்படங்களை எடுக்க கேமரா பொத்தானை தட்டவும்.</li>
+  <li>ஒரு புகைப்படமாவது எடுத்த பின்பே <strong>Submit</strong> பொத்தான் செயல்படும்; இல்லையெனில் அது செயல்படாது.</li>
+  <li>புகைப்படங்களை சமர்ப்பித்தவுடன், நீங்கள் கேலரி பக்கத்திற்கு வழிநடத்தப்படுவீர்கள், அங்கு உங்கள் படிவத்தைத் திருத்தலாம்.</li>
+</ul>
+
+<h2>Edit form பக்கம்:</h2>
+<ul>
+  <li>திருத்தும் பக்கத்தில், உங்கள் புகைப்படங்களுடன் உங்கள் தகவல்களை திருத்தவும்.</li>
+  <li>முதலாவது ஆறு தரவு அட்டைகளை நிரப்பும் வரை <strong>Submit</strong> பொத்தான் காணப்படாது.</li>
+  <li>அனைத்து புலங்களையும் நிரப்பிய பிறகு, <strong>Submit</strong> பொத்தானை அழுத்தி உங்கள் படிவத்தை சமர்ப்பிக்கலாம்.</li>
+</ul>
+
+<h2>RM Images பக்கம்:</h2>
+<ul>
+  <li>RM படங்கள் பக்கத்தில், நீங்கள் இணைப்பின் மூலம் எடுத்த அனைத்து புகைப்படங்களையும் காணலாம்.</li>
+  <li>ஒரு புகைப்படம் அல்லது பல புகைப்படங்களைத் தேர்ந்தெடுத்து, "ADD" பொத்தானை அழுத்தி அவற்றை திருத்தும் படிவத்தில் சேர்க்கலாம்.</li>
+</ul>
+
+<h2>RM History பக்கம்:</h2>
+<ul>
+  <li>RM வரலாறு பக்கத்தில், நீங்கள் சமர்ப்பித்த அனைத்து விவரங்களையும் காணலாம்.</li>
+</ul>
+
+<h2>Change Password பக்கம்:</h2>
+<ul>
+  <li>கடவுச்சொல் மாற்றும் பக்கத்தில், உங்கள் பதிவு செய்யப்பட்ட பெயர், தற்போதைய கடவுச்சொல் மற்றும் புதிய கடவுச்சொலை உள்ளிடவும். புதிய கடவுச்சொல்லை உறுதிப்படுத்திய பிறகு, "Update Password" பொத்தானை அழுத்தவும்.</li>
+  <li>உங்கள் கடவுச்சொல் வெற்றிகரமாக புதுப்பிக்கப்படும்.</li>
+</ul>
+</div> 
+ </div>
+
+      
+
+      <!-- Right aligned next button -->
+      <div class="responsive-button-container">
+        <button class="next1-button" onclick="showPage(2)">Go to Page 2</button>
+      </div>
+
+      <div class="page-indicator" id="pageIndicator">Page 1 of 2</div>
+    </div>
+
+    <!-- Page 2 -->
+    <div id="page2" class="page">
+         <div class="feature"><img src="WhatsApp.svg.webp" class="icon-img" alt="WhatsApp Icon"><div class="description">
+        <h3>WhatsApp Icon</h3><p>Tap this icon to send a quick message or chat with support.</p></div></div>
+
+        <div class="feature"><img src="callimage.png" class="icon-img" alt="Call Icon"><div class="description">
+        <h3>Call Icon</h3><p>Tap this icon to make a call to HR for any queries.</p></div></div>
+
+         <div class="feature"><img src="login.png" class="icon-img" alt="History Icon"><div class="description">
+         <h3>Login Button </h3><p>Given your username and password before enter "login" button ,to access the app with your credentials..</p></div></div>
+
+        <div class="feature"><img src="add.png" class="icon-img" alt="Add Icon"><div class="description">
+        <h3>Add Button</h3><p>Press this button  to add a photos taken through the link into edit form</p></div></div>
+
+        <div class="feature"><img src="back.png" class="icon-img" alt="Approve Icon"><div class="description">
+        <h3>Back Button</h3><p>use this button to back from current page.</p></div></div>
+
+        <div class="feature"><img src="camera.png" class="icon-img" alt="Exit Icon"><div class="description">
+        <h3>Camera Button</h3><p>Click this to open a camera and takes photos</p></div></div>
+
+        <div class="feature"><img src="copylink.png" class="icon-img" alt="Login Icon"><div class="description">
+        <h3>copylink Button</h3><p>Used this button to copy the RM photos taken link.</p></div></div>
+
+       <div class="feature"><img src="submit.png" class="icon-img" alt="Submit Icon"><div class="description">
+        <h3>Submit Button</h3><p>Tap this to submit your filled RM details.</p></div></div>
+
+
+  <div class="feature"><img src="linkphotos.png" class="icon-img" alt="Select Work Icon"><div class="description">
+  <h3>LinkPhotos Button</h3><p>Press the button,go to full grid RM photos in this page.</p></div></div>
+ <div class="feature"><img src="takephoto.png"class="icon-img" alt="Select Work Icon"><div class="description">
+  <h3>TakePhoto Button</h3><p>Press the button,go to "camera"page to take a photo.</p></div></div>
+ <div class="feature"><img src="updatepassword.png" class="icon-img" alt="Select Work Icon"><div class="description">
+  <h3>UpdatePassword Button</h3><p>Press the button,to update your current password.</p></div></div>
+
+      <div class="center-button">
+        <button class="next-button" onclick="showPage(1)">Back to Page 1</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(pageNumber) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(p => p.classList.remove('active'));
+      const nextPage = document.getElementById("page" + pageNumber);
+      nextPage.classList.add('active');
+      nextPage.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById("pageIndicator").innerText = `Page ${pageNumber} of ${pages.length}`;
+    }
+
+    let isTamil = false;
+    function toggleLanguage() {
+      isTamil = !isTamil;
+      document.getElementById("darEnglish").style.display = isTamil ? "none" : "block";
+      document.getElementById("darTamil").style.display = isTamil ? "block" : "none";
+      document.getElementById("langToggle").innerText = isTamil ? "English" : " தமிழ்";
+    }
+  </script>
+
+           </body>
+</html>
