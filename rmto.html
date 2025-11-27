@@ -3,362 +3,561 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DAR App Tutorial</title>
+  <title>RM-Inventory App Tutorial</title>
   <style>
-    * { box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #f0f4f8, #e6ecf0);
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 20px;
-      margin: 0;
-     box-sizing: border-box;
     }
 
     .tutorial-card {
       background: white;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-      max-width: 750px;
-      margin: 0 auto;
-      animation: fadeIn 0.8s ease-in-out;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 850px;
+      width: 100%;
+      position: relative;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h1 { text-align: center; font-size: 28px; color: #333; margin-bottom: 15px; }
-    h2 { font-size: 22px; margin-top: 20px; margin-bottom: 12px; color: #333; }
-    ul { padding-left: 20px; margin-bottom: 25px; }
-    ul li { margin-bottom: 10px; color: #444; line-height: 1.6; }
-
-    .feature {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 25px;
-      animation: fadeIn 0.6s ease;
-    }
-
-    .icon-img {
-      width: 80px;
-      height: auto;
-      margin-right: 15px;
-      border-radius: 8px;
-      transition: transform 0.3s ease;
-    }
-
-    .icon-img:hover { transform: scale(1.1); }
-
-    .description { flex-grow: 1; }
-    .description h3 {
-      margin: 0 0 6px 0;
-      font-size: 18px;
-      color: #222;
-    }
-    .description p {
-      margin: 0;
-      color: #555;
-      font-size: 15px;
-      line-height: 1.4;
-    }
-
-    .center-button, .responsive-button-container {
+    .header {
       text-align: center;
-      margin-top: 30px;
+      margin-bottom: 25px;
+      position: relative;
     }
 
-    .next-button, .next1-button {
+    h1 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .app-icon {
+      font-size: 36px;
+    }
+
+    .lang-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #f59e0b;
       color: white;
-      padding: 12px 30px;
-      font-size: 16px;
+      padding: 10px 20px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      font-weight: 600;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .next-button { background-color: #649ce6; }
+    .lang-btn:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+    }
+
+    .video-container {
+      text-align: center;
+      margin-bottom: 30px;
+      background: #f0fdf4;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px dashed #10b981;
+    }
+
+    .video-container h2 {
+      font-size: 22px;
+      color: #065f46;
+      margin-bottom: 15px;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      max-width: 400px;
+      height: 225px;
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      color: #065f46;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content-section h2 {
+      font-size: 24px;
+      color: #1f2937;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #10b981;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 25px;
+    }
+
+    ul li {
+      padding: 12px 0 12px 35px;
+      margin-bottom: 12px;
+      line-height: 1.7;
+      color: #4b5563;
+      position: relative;
+      font-size: 16px;
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 12px 12px 12px 40px;
+    }
+
+    ul li:before {
+      content: "✓";
+      position: absolute;
+      left: 12px;
+      color: #10b981;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .next-button {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: white;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
     .next-button:hover {
-      background-color: #649ce6;
       transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 20px rgba(17, 153, 142, 0.4);
     }
-
-    .next1-button { background-color: #438359; }
-    .next1-button:hover {
-      background-color: #3a754f;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-    }
-
-    .page { display: none; opacity: 0; transition: opacity 0.4s ease; }
-    .active { display: block; opacity: 1; }
 
     .page-indicator {
       text-align: center;
-      margin-top: 15px;
+      color: #6b7280;
+      margin-top: 20px;
       font-size: 14px;
-      color: #666;
       font-weight: 500;
     }
 
- .video-container {
-  width: 100%;
-  max-width: 360px; /* Adjust this for desired portrait width */
-  margin: auto;
-  padding: 0;
-}
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
 
-.video-container video {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+      transition: width 0.4s ease;
+    }
 
+    .highlight {
+      background: #fef3c7;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      color: #92400e;
+    }
+
+    .button-demo {
+      display: inline-block;
+      background: #3b82f6;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      margin: 0 4px;
+    }
+
+    .important-note {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+
+    .important-note strong {
+      color: #991b1b;
+    }
+
+    .success-note {
+      background: #f0fdf4;
+      border-left: 4px solid #10b981;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+
+    .success-note strong {
+      color: #065f46;
+    }
 
     @media (max-width: 600px) {
-      .tutorial-card { padding: 15px; }
-      h1 { font-size: 24px; }
-      h2 { font-size: 18px; }
-
-      .feature {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+      .tutorial-card {
+        padding: 20px;
       }
 
-      .icon-img {
-        margin: 0 0 10px 0;
-        width: 50px;
+      h1 {
+        font-size: 24px;
       }
 
-      .description h3 { font-size: 16px; }
-      .description p { font-size: 14px; }
-
-      .next-button, .next1-button {
-        width: 100%;
-        font-size: 15px;
+      .lang-btn {
+        position: static;
+        display: block;
+        margin: 10px auto 20px;
       }
 
-      .responsive-button-container { text-align: center; }
+      .header {
+        margin-bottom: 20px;
+      }
     }
-    @media (min-width: 768px) {
-  .video-container {
-    width: 50%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .video-container {
-    width: 40%;
-  }
-}
-
-  </style>   
+  </style>
 </head>
 <body>
 
-  <div class="tutorial-card">
-    <h1>RM-INVENTORY APP TUTORIAL🙌</h1>
+<div class="tutorial-card">
+  <div class="header">
+    <h1><span class="app-icon">📦</span> RM-INVENTORY APP</h1>
+    <button class="lang-btn" id="langToggle" onclick="toggleLanguage()">தமிழ்</button>
+  </div>
 
-    <!-- Page 1 -->
-    <div id="page1" class="page active">
-      <div class="center-button">
-        <button class="next-button" id="langToggle" onclick="toggleLanguage()">தமிழ்</button>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressBar" style="width: 16.66%"></div>
+  </div>
+
+  <div class="video-container">
+    <h2 id="videoTitle">📹 Tutorial Video</h2>
+    <div class="video-placeholder">🎬 Video Guide</div>
+  </div>
+
+  <!-- PAGE 1: LOGIN -->
+  <div id="page1" class="page active">
+    <div class="content-section" id="english1">
+      <h2><span class="step-number">1</span> Login Page</h2>
+      <ul>
+        <li>Open the <b>RM-Inventory App</b> on your device</li>
+        <li>Login page will appear automatically</li>
+        <li>Enter your assigned <b>Username</b> in the first field</li>
+        <li>Enter your <b>Password</b> in the second field</li>
+        <li>Click the <span class="highlight">Enter</span> button to access the app</li>
+      </ul>
+      <div class="important-note">
+        <strong>⚠️ Important:</strong> Make sure you enter correct credentials to proceed
       </div>
+    </div>
+    <div class="content-section" id="tamil1" style="display:none;">
+      <h2><span class="step-number">1</span> உள்நுழைவு பக்கம்</h2>
+      <ul>
+        <li>உங்கள் device-ல் <b>RM-Inventory App</b>-ஐ திறக்கவும்</li>
+        <li>Login பக்கம் தானாகவே வரும்</li>
+        <li>முதல் field-ல் உங்களுக்கு கொடுக்கப்பட்ட <b>பயனர் பெயரை</b> உள்ளிடவும்</li>
+        <li>இரண்டாவது field-ல் உங்கள் <b>கடவுச்சொல்லை</b> உள்ளிடவும்</li>
+        <li>App-க்குள் செல்ல <span class="highlight">Enter</span> பட்டனை அழுத்தவும்</li>
+      </ul>
+      <div class="important-note">
+        <strong>⚠️ முக்கியம்:</strong> தொடர சரியான விவரங்களை உள்ளிட்டுள்ளீர்களா என்று உறுதி செய்யவும்
+      </div>
+    </div>
+    <div class="navigation">
+      <button class="next-button" onclick="showPage(2)">Next →</button>
+    </div>
+    <div class="page-indicator">Page 1 of 6</div>
+  </div>
 
-     <div class="video-container">
-  <h2>TUTORIAL VIDEO</h2>
-  <video controls>
-    <source src="rm-video (1).mp4" type="video/mp4">
-  </video>
+  <!-- PAGE 2: SELECT PICS PAGE -->
+  <div id="page2" class="page">
+    <div class="content-section" id="english2">
+      <h2><span class="step-number">2</span> Select Pics Page</h2>
+      <ul>
+        <li>After login, you'll see the <b>Select Pics Page</b></li>
+        <li>This page has 3 main buttons:</li>
+        <li><span class="button-demo">📷 Camera</span> - Click to take new photos</li>
+        <li><span class="button-demo">📝 Go to Edit Form</span> - Navigate to edit form with selected images</li>
+        <li><span class="button-demo">🔄 Reset All</span> - Uncheck all selected images</li>
+        <li>You can see all previously captured photos here</li>
+        <li>Use <b>checkboxes</b> to select images you want to edit</li>
+        <li>Select multiple images if needed</li>
+        <li>Click "Reset All" to clear all selections</li>
+      </ul>
+    </div>
+    <div class="content-section" id="tamil2" style="display:none;">
+      <h2><span class="step-number">2</span> புகைப்படம் தேர்வு பக்கம்</h2>
+      <ul>
+        <li>Login செய்த பிறகு <b>Select Pics Page</b> வரும்</li>
+        <li>இந்த page-ல் 3 முக்கிய buttons இருக்கும்:</li>
+        <li><span class="button-demo">📷 Camera</span> - புதிய photos எடுக்க click செய்யவும்</li>
+        <li><span class="button-demo">📝 Go to Edit Form</span> - தேர்ந்தெடுத்த images-உடன் edit form-க்கு செல்லவும்</li>
+        <li><span class="button-demo">🔄 Reset All</span> - தேர்ந்தெடுத்த எல்லா images-யும் uncheck செய்யவும்</li>
+        <li>முன்பு எடுத்த எல்லா photos-யும் இங்கே பார்க்கலாம்</li>
+        <li>Edit செய்ய வேண்டிய images-ஐ <b>checkbox</b> use பண்ணி select செய்யவும்</li>
+        <li>தேவையானால் பல images தேர்வு செய்யலாம்</li>
+        <li>எல்லா selections-யும் clear செய்ய "Reset All" click செய்யவும்</li>
+      </ul>
+    </div>
+    <div class="navigation">
+      <button class="next-button" onclick="showPage(1)">← Previous</button>
+      <button class="next-button" onclick="showPage(3)">Next →</button>
+    </div>
+    <div class="page-indicator">Page 2 of 6</div>
+  </div>
+
+  <!-- PAGE 3: CAMERA PAGE -->
+  <div id="page3" class="page">
+    <div class="content-section" id="english3">
+      <h2><span class="step-number">3</span> Camera Page</h2>
+      <ul>
+        <li>Click the <span class="highlight">Camera Button</span> to open camera</li>
+        <li>Take as many <b>new photos</b> as you need</li>
+        <li>There is <b>no limit</b> on number of photos you can take</li>
+        <li>Make sure photos are clear and properly focused</li>
+        <li>After capturing all required photos, click <span class="highlight">Submit</span></li>
+        <li>All captured photos will be automatically sent to <b>Select Images Screen</b></li>
+        <li>You can now see your newly taken photos in the image list</li>
+      </ul>
+      <div class="success-note">
+        <strong>✓ Tip:</strong> Take clear photos from proper angles for better documentation
+      </div>
+    </div>
+    <div class="content-section" id="tamil3" style="display:none;">
+      <h2><span class="step-number">3</span> கேமரா பக்கம்</h2>
+      <ul>
+        <li>Camera திறக்க <span class="highlight">Camera Button</span> click செய்யவும்</li>
+        <li>எவ்வளவு வேண்டுமானாலும் <b>புதிய photos</b> எடுக்கலாம்</li>
+        <li>Photos எண்ணிக்கைக்கு <b>வரம்பு இல்லை</b></li>
+        <li>Photos தெளிவாகவும் சரியாக focus செய்யப்பட்டதாகவும் இருக்கிறதா என்று பார்க்கவும்</li>
+        <li>தேவையான எல்லா photos-யும் எடுத்தவுடன் <span class="highlight">Submit</span> click செய்யவும்</li>
+        <li>எடுத்த எல்லா photos-யும் தானாகவே <b>Select Images Screen</b>-க்கு அனுப்பப்படும்</li>
+        <li>புதிதாக எடுத்த photos image list-ல் இப்போது பார்க்கலாம்</li>
+      </ul>
+      <div class="success-note">
+        <strong>✓ குறிப்பு:</strong> சிறந்த documentation-க்காக சரியான கோணத்தில் தெளிவான photos எடுக்கவும்
+      </div>
+    </div>
+    <div class="navigation">
+      <button class="next-button" onclick="showPage(2)">← Previous</button>
+      <button class="next-button" onclick="showPage(4)">Next →</button>
+    </div>
+    <div class="page-indicator">Page 3 of 6</div>
+  </div>
+
+  <!-- PAGE 4: SELECT & NAVIGATE -->
+  <div id="page4" class="page">
+    <div class="content-section" id="english4">
+      <h2><span class="step-number">4</span> Select & Navigate to Edit Form</h2>
+      <ul>
+        <li>Return to <b>Select Images Screen</b> after photo submission</li>
+        <li>You'll see all photos including newly captured ones</li>
+        <li>Review all available images carefully</li>
+        <li>Use <b>checkboxes</b> to select only the images you want to edit</li>
+        <li>You can select one or multiple images</li>
+        <li>After selecting required images, click <span class="highlight">Go to Edit Form</span> button</li>
+        <li>Selected images will be carried forward to the Edit Form page</li>
+      </ul>
+    </div>
+    <div class="content-section" id="tamil4" style="display:none;">
+      <h2><span class="step-number">4</span> தேர்வு செய்து Edit Form-க்கு செல்லுதல்</h2>
+      <ul>
+        <li>Photo submission-க்கு பிறகு <b>Select Images Screen</b>-க்கு திரும்பவும்</li>
+        <li>புதிதாக எடுத்தவை உட்பட எல்லா photos-யும் பார்க்கலாம்</li>
+        <li>கிடைக்கும் எல்லா images-யும் கவனமாக பார்க்கவும்</li>
+        <li>Edit செய்ய வேண்டிய images மட்டும் <b>checkbox</b> use பண்ணி select செய்யவும்</li>
+        <li>ஒன்று அல்லது பல images தேர்வு செய்யலாம்</li>
+        <li>தேவையான images select செய்தபின் <span class="highlight">Go to Edit Form</span> button click செய்யவும்</li>
+        <li>தேர்ந்தெடுக்கப்பட்ட images Edit Form page-க்கு எடுத்துச் செல்லப்படும்</li>
+      </ul>
+    </div>
+    <div class="navigation">
+      <button class="next-button" onclick="showPage(3)">← Previous</button>
+      <button class="next-button" onclick="showPage(5)">Next →</button>
+    </div>
+    <div class="page-indicator">Page 4 of 6</div>
+  </div>
+
+  <!-- PAGE 5: EDIT FORM PAGE -->
+  <div id="page5" class="page">
+    <div class="content-section" id="english5">
+      <h2><span class="step-number">5</span> Edit Form Page</h2>
+      <ul>
+        <li>Selected images will be <b>displayed at the top</b> of the page</li>
+        <li>Below the images, you'll see a <b>form with required fields</b></li>
+        <li>Fill in <b>all the details</b> requested in the form carefully</li>
+        <li>Make sure no field is left empty</li>
+        <li>Double-check all entered information for accuracy</li>
+        <li>The <span class="highlight">Submit</span> button will appear only after filling all fields</li>
+        <li>Click <b>Submit</b> to save the data</li>
+        <li>Your data along with selected images will be stored in the database</li>
+      </ul>
+      <div class="success-note">
+        <strong>✓ Success:</strong> Data and images stored successfully in database!
+      </div>
+    </div>
+    <div class="content-section" id="tamil5" style="display:none;">
+      <h2><span class="step-number">5</span> Edit Form பக்கம்</h2>
+      <ul>
+        <li>தேர்ந்தெடுத்த images பக்கத்தின் <b>மேல் பகுதியில் காட்டப்படும்</b></li>
+        <li>Images-க்கு கீழே <b>தேவையான fields உடன் form</b> இருக்கும்</li>
+        <li>Form-ல் கேட்கப்படும் <b>அனைத்து விவரங்களையும்</b> கவனமாக நிரப்பவும்</li>
+        <li>எந்த field-யும் காலியாக விடாதீர்கள்</li>
+        <li>உள்ளிட்ட எல்லா தகவல்களும் சரியா என்று இரண்டு முறை சரிபார்க்கவும்</li>
+        <li>எல்லா fields-யும் நிரப்பிய பின்னரே <span class="highlight">Submit</span> button வரும்</li>
+        <li>Data-வை save செய்ய <b>Submit</b> click செய்யவும்</li>
+        <li>உங்கள் data மற்றும் தேர்ந்தெடுத்த images database-ல் store ஆகும்</li>
+      </ul>
+      <div class="success-note">
+        <strong>✓ வெற்றி:</strong> Data மற்றும் images வெற்றிகரமாக database-ல் சேமிக்கப்பட்டது!
+      </div>
+    </div>
+    <div class="navigation">
+      <button class="next-button" onclick="showPage(4)">← Previous</button>
+      <button class="next-button" onclick="showPage(6)">Next →</button>
+    </div>
+    <div class="page-indicator">Page 5 of 6</div>
+  </div>
+
+  <!-- PAGE 6: RM-FINAL DATA -->
+  <div id="page6" class="page">
+    <div class="content-section" id="english6">
+      <h2><span class="step-number">6</span> RM-Final Data (History)</h2>
+      <ul>
+        <li>This is the <b>Data History Page</b></li>
+        <li>All previously submitted data will be displayed here</li>
+        <li>You can see your <b>complete submission history</b></li>
+        <li>Each entry shows the data with associated images</li>
+        <li>Review and verify your past submissions</li>
+        <li>Check for any errors or missing information</li>
+        <li>Use this page to track all your inventory records</li>
+      </ul>
+      <div class="success-note">
+        <strong>🎉 Congratulations!</strong> You have completed the RM-Inventory App tutorial
+      </div>
+    </div>
+    <div class="content-section" id="tamil6" style="display:none;">
+      <h2><span class="step-number">6</span> RM-Final Data (வரலாறு)</h2>
+      <ul>
+        <li>இது <b>Data History Page</b></li>
+        <li>முன்பு submit செய்த எல்லா data-வும் இங்கே காட்டப்படும்</li>
+        <li>உங்கள் <b>முழு submission history</b>-யும் பார்க்கலாம்</li>
+        <li>ஒவ்வொரு entry-யும் data மற்றும் அதனுடன் தொடர்புடைய images-ஐ காட்டும்</li>
+        <li>உங்கள் முந்தைய submissions-ஐ review செய்து சரிபார்க்கவும்</li>
+        <li>ஏதேனும் தவறுகள் அல்லது missing information இருக்கிறதா என்று பார்க்கவும்</li>
+        <li>உங்கள் எல்லா inventory records-யும் track செய்ய இந்த page-ஐ பயன்படுத்தவும்</li>
+      </ul>
+      <div class="success-note">
+        <strong>🎉 வாழ்த்துக்கள்!</strong> நீங்கள் RM-Inventory App tutorial-ஐ முடித்துவிட்டீர்கள்
+      </div>
+    </div>
+    <div class="navigation">
+      <button class="next-button" onclick="showPage(5)">← Previous</button>
+      <button class="next-button" onclick="showPage(1)">↺ Restart Tutorial</button>
+    </div>
+    <div class="page-indicator">Page 6 of 6</div>
+  </div>
+
 </div>
 
+<script>
+  let currentPage = 1;
+  let isTamil = false;
 
+  function showPage(num) {
+    currentPage = num;
+    
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    
+    // Show selected page
+    document.getElementById("page" + num).classList.add('active');
+    
+    // Update progress bar
+    const progress = (num / 6) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+  }
 
-      <!-- English Notes -->
-      <div id="darEnglish">
-<h2>LOGIN PAGE:</h2>
-        <ul> 
-          <li>First, log in using your username and password by clicking the "ENTER" button and turn on your location before login a app</li>
-        </ul>
-
-        <h2>GALLERY PAGE:</h2>
-        <ul>
-          <li>On the gallery screen, tap the top <strong>"Take Photo"</strong> button to open the camera page and capture a photo.</li>
-          <li>After capturing a photo, It will appear as a pending entry on the gallery page. Tap the <strong>">"</strong> (arrow) to fill in the required details.</li>
-          <li>At the bottom of the gallery screen, there are three buttons:</li>
-          <li>Click the <strong>"Copy Link"</strong> button to copy the RM Camera link.</li>
-          <li>Click the <strong>"Link Photos"</strong> button to navigate to the <strong>"Sample Pics"</strong> page showing RM photos.</li>
-          <li>Click the <strong>"RM-History"</strong> button to navigate to the <strong>"History Page"</strong>, which shows your submitted details.</li>
-          <li>Submitted entries appear in <strong>green</strong>, while pending entries appear in <strong>light red</strong>.</li>
-        </ul>
-
-
-      <h2>CAMERA PAGE:</h2>
-<ul>
-  <li>On the camera page, there is a button to open the camera, with options for both front and back cameras.</li>
-  <li>Tap the camera button to take photos.</li>
-  <li>You can only submit your photos after taking at least one; the submit button will be disabled otherwise.</li>
-  <li>Once you submit your photos, you will be redirected to the gallery page to edit your form.</li>
-</ul>
-
-<h2>EDIT FORM PAGE:</h2>
-<ul>
-  <li>On the edit form page, update your information along with the attached photos.</li>
-  <li>The submit button will not be visible until the first six data value cards are filled out.</li>
-  <li>After filling in all the fields, click the submit button to complete the process.</li>
-</ul>
-
-<h2>RM IMAGES PAGE:</h2>
-<ul>
-  <li>On the RM History page, you will see all images taken through the provided link.</li>
-  <li>Select one or multiple photos, then press the "ADD" button to add them to the edit form.</li>
-</ul>
-
-<h2>RM HISTORY PAGE:</h2>
-<ul>
-  <li>On the RM History page, you will see all the details you have submitted.</li>
-</ul>
-
-
-<h2>CHANGE PASSWORD PAGE:</h2>
-<ul>
-  <li>On the Change Password page, enter your registered Name, current password, and new password. Confirm the new password, then click the "Update Password" button.</li>
-  <li>Your password will be successfully updated.</li>
-</ul>
-
-  </div>
-
-      <!-- Tamil Notes -->
-      <div id="darTamil" style="display: none;">
-        <div id="darTamil">
-
- <h2>Login பக்கம்:</h2>
-<ul>
-  <li>முதலில், உங்கள் பயனர்பெயர் மற்றும் கடவுச்சொல்லைப் பயன்படுத்தி "ENTER" பொத்தானை கிளிக் செய்து உள்நுழைக.
-     உள்நுழைவதற்கு முன் உங்கள் இடத்தை (location) இயக்கவும்.</li>
-</ul>
-
-<h2>Gallery பக்கம்:</h2>
-<ul>
-  <li>கேலரி திரையில், மேல் பகுதியில் உள்ள <strong>"Take Photo"</strong> பொத்தானைத் தட்டினால்,
-     கேமரா பக்கம் திறக்கப்படும் மற்றும் புகைப்படம் எடுக்கலாம்.</li>
-  <li>புகைப்படம் எடுத்த பின்பு, அது ஒரு நிலுவையிலான பதிவாக கேலரி பக்கத்தில் தோன்றும். தேவையான விவரங்களை 
-    உள்ளிட <strong>">"</strong> (அம்பு) பொத்தானைத் தட்டவும்.</li>
-  <li>கேலரி திரையின் கீழ் மூன்று பொத்தான்கள் உள்ளன:</li>
-  <li><strong>"Copy Link"</strong> பொத்தானை அழுத்தி RM கேமரா இணைப்பை நகலெடுக்கலாம்.</li>
-  <li><strong>"Link Photos"</strong> பொத்தானை அழுத்தி <strong>"Sample Pics"</strong> பக்கத்துக்குச் செல்லலாம், அங்கு RM புகைப்படங்கள் காட்டப்படும்.</li>
-  <li><strong>"RM-History"</strong> பொத்தானை அழுத்தி <strong>"History Page"</strong> பக்கத்துக்குச் செல்லலாம், அங்கு நீங்கள் சமர்ப்பித்த அனைத்து விவரங்களும் காணப்படும்.</li>
-  <li>சமர்ப்பித்த பதிவுகள் <strong>பச்சை</strong> நிறத்தில் காணப்படும், நிலுவையிலுள்ளவை <strong>இளஞ்சிவப்பு</strong> நிறத்தில் காணப்படும்.</li>
-</ul>
-
-<h2>Camera பக்கம்:</h2>
-<ul>
-  <li>கேமரா பக்கத்தில், கேமராவை திறக்கும் ஒரு பொத்தான் இருக்கும், இதில் முன்னணி மற்றும் பின்னணி கேமரா ஆகிய இரண்டும் தேர்வு செய்யலாம்.</li>
-  <li>புகைப்படங்களை எடுக்க கேமரா பொத்தானை தட்டவும்.</li>
-  <li>ஒரு புகைப்படமாவது எடுத்த பின்பே <strong>Submit</strong> பொத்தான் செயல்படும்; இல்லையெனில் அது செயல்படாது.</li>
-  <li>புகைப்படங்களை சமர்ப்பித்தவுடன், நீங்கள் கேலரி பக்கத்திற்கு வழிநடத்தப்படுவீர்கள், அங்கு உங்கள் படிவத்தைத் திருத்தலாம்.</li>
-</ul>
-
-<h2>Edit form பக்கம்:</h2>
-<ul>
-  <li>திருத்தும் பக்கத்தில், உங்கள் புகைப்படங்களுடன் உங்கள் தகவல்களை திருத்தவும்.</li>
-  <li>முதலாவது ஆறு தரவு அட்டைகளை நிரப்பும் வரை <strong>Submit</strong> பொத்தான் காணப்படாது.</li>
-  <li>அனைத்து புலங்களையும் நிரப்பிய பிறகு, <strong>Submit</strong> பொத்தானை அழுத்தி உங்கள் படிவத்தை சமர்ப்பிக்கலாம்.</li>
-</ul>
-
-<h2>RM Images பக்கம்:</h2>
-<ul>
-  <li>RM படங்கள் பக்கத்தில், நீங்கள் இணைப்பின் மூலம் எடுத்த அனைத்து புகைப்படங்களையும் காணலாம்.</li>
-  <li>ஒரு புகைப்படம் அல்லது பல புகைப்படங்களைத் தேர்ந்தெடுத்து, "ADD" பொத்தானை அழுத்தி அவற்றை திருத்தும் படிவத்தில் சேர்க்கலாம்.</li>
-</ul>
-
-<h2>RM History பக்கம்:</h2>
-<ul>
-  <li>RM வரலாறு பக்கத்தில், நீங்கள் சமர்ப்பித்த அனைத்து விவரங்களையும் காணலாம்.</li>
-</ul>
-
-<h2>Change Password பக்கம்:</h2>
-<ul>
-  <li>கடவுச்சொல் மாற்றும் பக்கத்தில், உங்கள் பதிவு செய்யப்பட்ட பெயர், தற்போதைய கடவுச்சொல் மற்றும் புதிய கடவுச்சொலை உள்ளிடவும். புதிய கடவுச்சொல்லை உறுதிப்படுத்திய பிறகு, "Update Password" பொத்தானை அழுத்தவும்.</li>
-  <li>உங்கள் கடவுச்சொல் வெற்றிகரமாக புதுப்பிக்கப்படும்.</li>
-</ul>
-</div> 
- </div>
-
+  function toggleLanguage() {
+    isTamil = !isTamil;
+    
+    // Toggle language for all pages
+    for (let i = 1; i <= 6; i++) {
+      const englishEl = document.getElementById("english" + i);
+      const tamilEl = document.getElementById("tamil" + i);
       
-
-      <!-- Right aligned next button -->
-      <div class="responsive-button-container">
-        <button class="next1-button" onclick="showPage(2)">Go to Page 2</button>
-      </div>
-
-      <div class="page-indicator" id="pageIndicator">Page 1 of 2</div>
-    </div>
-
-    <!-- Page 2 -->
-    <div id="page2" class="page">
-         <div class="feature"><img src="WhatsApp.svg.webp" class="icon-img" alt="WhatsApp Icon"><div class="description">
-        <h3>WhatsApp Icon</h3><p>Tap this icon to send a quick message or chat with support.</p></div></div>
-
-        <div class="feature"><img src="callimage.png" class="icon-img" alt="Call Icon"><div class="description">
-        <h3>Call Icon</h3><p>Tap this icon to make a call to HR for any queries.</p></div></div>
-
-         <div class="feature"><img src="login.png" class="icon-img" alt="History Icon"><div class="description">
-         <h3>Login Button </h3><p>Given your username and password before enter "login" button ,to access the app with your credentials..</p></div></div>
-
-        <div class="feature"><img src="add.png" class="icon-img" alt="Add Icon"><div class="description">
-        <h3>Add Button</h3><p>Press this button  to add a photos taken through the link into edit form</p></div></div>
-
-        <div class="feature"><img src="back.png" class="icon-img" alt="Approve Icon"><div class="description">
-        <h3>Back Button</h3><p>use this button to back from current page.</p></div></div>
-
-        <div class="feature"><img src="camera.png" class="icon-img" alt="Exit Icon"><div class="description">
-        <h3>Camera Button</h3><p>Click this to open a camera and takes photos</p></div></div>
-
-        <div class="feature"><img src="copylink.png" class="icon-img" alt="Login Icon"><div class="description">
-        <h3>copylink Button</h3><p>Used this button to copy the RM photos taken link.</p></div></div>
-
-       <div class="feature"><img src="submit.png" class="icon-img" alt="Submit Icon"><div class="description">
-        <h3>Submit Button</h3><p>Tap this to submit your filled RM details.</p></div></div>
-
-
-  <div class="feature"><img src="linkphotos.png" class="icon-img" alt="Select Work Icon"><div class="description">
-  <h3>LinkPhotos Button</h3><p>Press the button,go to full grid RM photos in this page.</p></div></div>
- <div class="feature"><img src="takephoto.png"class="icon-img" alt="Select Work Icon"><div class="description">
-  <h3>TakePhoto Button</h3><p>Press the button,go to "camera"page to take a photo.</p></div></div>
- <div class="feature"><img src="updatepassword.png" class="icon-img" alt="Select Work Icon"><div class="description">
-  <h3>UpdatePassword Button</h3><p>Press the button,to update your current password.</p></div></div>
-
-      <div class="center-button">
-        <button class="next-button" onclick="showPage(1)">Back to Page 1</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function showPage(pageNumber) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(p => p.classList.remove('active'));
-      const nextPage = document.getElementById("page" + pageNumber);
-      nextPage.classList.add('active');
-      nextPage.scrollIntoView({ behavior: 'smooth' });
-      document.getElementById("pageIndicator").innerText = `Page ${pageNumber} of ${pages.length}`;
+      if (englishEl && tamilEl) {
+        englishEl.style.display = isTamil ? "none" : "block";
+        tamilEl.style.display = isTamil ? "block" : "none";
+      }
     }
+    
+    // Update button text
+    document.getElementById("langToggle").innerText = isTamil ? "English" : "தமிழ்";
+    
+    // Update video title
+    document.getElementById("videoTitle").innerText = isTamil ? "📹 பயிற்சி வீடியோ" : "📹 Tutorial Video";
+  }
+</script>
 
-    let isTamil = false;
-    function toggleLanguage() {
-      isTamil = !isTamil;
-      document.getElementById("darEnglish").style.display = isTamil ? "none" : "block";
-      document.getElementById("darTamil").style.display = isTamil ? "block" : "none";
-      document.getElementById("langToggle").innerText = isTamil ? "English" : " தமிழ்";
-    }
-  </script>
-
-           </body>
+</body>
 </html>
