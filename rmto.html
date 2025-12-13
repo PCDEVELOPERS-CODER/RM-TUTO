@@ -78,6 +78,13 @@
       border-radius: 12px;
       border: 2px dashed #10b981;
     }
+      .video-container video {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
 
     .video-container h2 {
       font-size: 22px;
@@ -270,6 +277,14 @@
         display: block;
         margin: 10px auto 20px;
       }
+       .video-container {
+        padding: 15px;
+      }
+
+      .video-container h2 {
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
 
       .header {
         margin-bottom: 20px;
@@ -289,9 +304,13 @@
     <div class="progress-fill" id="progressBar" style="width: 16.66%"></div>
   </div>
 
+  
   <div class="video-container">
-    <h2 id="videoTitle">📹 Tutorial Video</h2>
-    <div class="video-placeholder">🎬 Video Guide</div>
+    <h2 id="videoTitle">Tutorial Video</h2>
+    <video controls>
+      <source src="rm.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 
   <!-- PAGE 1: LOGIN -->
